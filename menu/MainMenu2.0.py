@@ -32,22 +32,6 @@ def open_game(game):
     spec.loader.exec_module(foo)
     foo.MyClass()
 
-
-def sokoban():
-    pass
-def spaceinvaders():
-    pass
-def tetris():
-    pass
-def dino():
-    spec = importlib.util.spec_from_file_location("trex.py", path+"/dino/trex.py")
-    foo = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(foo)
-    foo.MyClass()
-
-def snake():
-    pass
-
 def menu_animation():
     shift = 400
     while shift > -20:
