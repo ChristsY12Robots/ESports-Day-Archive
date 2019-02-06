@@ -1,2 +1,1 @@
-J:\menu\MainMenu.py
-ECHO Main
+python J:\menu\MainMenu.py
