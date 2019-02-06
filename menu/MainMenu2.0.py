@@ -28,10 +28,12 @@ snakeim = pygame.image.load('snake.png')
 
 def open_game(game):
     spec = importlib.util.spec_from_file_location(game+".py", "{}/{}/{}.py".format(path,game,game))
+    dirpath = "{}\{}".format(path,game)
+    os.chdir(dirpath)   
     foo = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(foo)
     foo.MyClass()
-
+    
 def menu_animation():
     shift = 400
     while shift > -20:
