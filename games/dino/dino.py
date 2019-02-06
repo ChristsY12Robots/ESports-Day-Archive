@@ -4,6 +4,14 @@ import pygame
 import random
 from pygame import *
 
+import profile
+#for esports day 6/2/19
+#save function
+def save(score_display):
+    username = os.getlogin() #get username
+    user_profile = profile.User_Profile(username)
+    user_profile.update_score(score_display)
+    user_profile.add_game_record('Dino')
 
 pygame.init()
 
@@ -455,6 +463,7 @@ def gameplay():
 
             if playerDino.isDead:
                 gameOver = True
+                save(playerDino.score)
                 print(playerDino.score)#score show
                 if playerDino.score > high_score:
                     high_score = playerDino.score
@@ -494,7 +503,7 @@ def gameplay():
                     screen.blit(HI_image,HI_rect)
                 pygame.display.update()
             clock.tick(FPS)
-
+    #save(playerDino.score)
     pygame.quit()
     quit()
 
