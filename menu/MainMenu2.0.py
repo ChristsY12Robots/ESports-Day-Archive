@@ -27,9 +27,11 @@ dinoim = pygame.image.load('dino.png')
 snakeim = pygame.image.load('snake.png')
 
 def open_game(game):
+    pygame.quit()
     spec = importlib.util.spec_from_file_location(game+".py", "{}/{}/{}.py".format(path,game,game))
     dirpath = "{}\{}".format(path,game)
-    os.chdir(dirpath)   
+    os.chdir(dirpath)
+    sys.path.insert(0, dirpath)
     foo = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(foo)
     foo.MyClass()
