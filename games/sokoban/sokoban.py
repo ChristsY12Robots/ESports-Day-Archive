@@ -1,6 +1,23 @@
 ##import sys
 import pygame
 from pygame.locals import *
+import os
+import profile
+
+#for esports day 6/2/19
+#save function
+def save(score_display):
+    username = os.getlogin() #get username
+    user_profile = profile.User_Profile(username)
+    user_profile.update_score(score_display)
+    user_profile.add_game_record('Sokoban')
+
+def get_score(time,level):
+    level = level - 1
+    score = (level * 10000)/time
+    save(score)
+
+
 
 tile_characters = {
     "─": "images/wall-width.png",
@@ -215,6 +232,7 @@ def check_keyboard_events():
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            get_score(timer,current_map)
             pygame.quit()
             quit()
         if event.type == pygame.KEYDOWN:
@@ -302,6 +320,7 @@ timer = 0
 
 
 def quitgame():
+    getscore(timer,current_map)
     pygame.quit()
     quit()
 

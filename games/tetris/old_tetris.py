@@ -1,10 +1,6 @@
 import tkinter as tk
 import random
 import time
-import profile
-import os
-
-
 try:
     import pygame as pg
 except ImportError:
@@ -13,13 +9,6 @@ else:
     audio = True
 import sys
 from matrix_rotation import rotate_array as ra
-
-#save function
-def save(score_display):
-    username = os.getlogin() #get username
-    user_profile = profile.User_Profile(username)
-    user_profile.update_score(score_display)
-    user_profile.add_game_record('Tetris')
 
 class Shape:
     def __init__(self, shape, key, piece, row, column, coords):
@@ -122,7 +111,7 @@ class Tetris:
             self.parent.bind(key, self.rotate)
         for key in ('<space>', '<End>', '<Control_R>', 'z', 'Z', '0', 'c', 'C'):
             self.parent.bind(key, self.snap)
-        self.parent.bind('<Escape>', self.quit_game) #changed self.pause to self.quit_game 1/2/19
+        self.parent.bind('<Escape>', self.pause)
         self.parent.bind('<Control-n>', self.draw_board)
         self.parent.bind('<Control-N>', self.draw_board)
         self.parent.bind('g', self.toggle_guides)
@@ -153,14 +142,7 @@ class Tetris:
                                          font=('Arial Black', 12))
         self.high_score_label.grid(row=3, column=1, stick='N')
         self.draw_board()
-
-    #added 1/2/19
-    def quit_game(self,event=None):
-        score = self.score # use this score to save to database
-        save(score)
-        root.destroy()
-        quit()
-        
+    
     def draw_board(self, event=None):
         if self.ticking:
             self.parent.after_cancel(self.ticking)
@@ -471,7 +453,6 @@ class Tetris:
         self.clear_iter(range(len(self.board)))
         #added for esports day 1/2/19
         score = self.score # score to do something with
-        save(score)
         time.sleep(2)
         root.destroy() #quits game
         quit()
